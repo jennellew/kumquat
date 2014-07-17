@@ -12,13 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.label :username %><br>
+    <%= f.text_field :username %>
   </div>
   <div class="field">
     <%= f.label :email %><br>
     <%= f.text_field :email %>
   </div>
+ <div class="field">
+   <%= f.label :alphanum_password %><br>
+   <%= f.password_field :alphanum_password %>
+  </div>
+ 
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+  def welcome
+  end
+  
   # GET /users
   # GET /users.json
   def index
@@ -14,7 +17,7 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    @user = User.new
+    @user = User.new(params[:user])
   end
 
   # GET /users/1/edit
@@ -49,6 +52,9 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+  end
+  
+  def login 
   end
 
   # DELETE /users/1
