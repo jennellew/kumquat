@@ -31,11 +31,12 @@ class UsersController < ApplicationController
     if @user.save
       flash[:notice] = "You signed up successfully"
       flash[:color]= "valid"
+      redirect_to '/users'
     else
       flash[:notice] = "Form is invalid"
       flash[:color]= "invalid"
+      render "new"
     end
-    render "new"
   end
 
   # PATCH/PUT /users/1
