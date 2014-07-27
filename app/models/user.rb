@@ -2,9 +2,6 @@ class User < ActiveRecord::Base
   attr_accessor :password
   attr_writer :current_step
   
-  before_save :encrypt_password
-  after_save :clear_password
-  
   validates :username, :presence => true, :uniqueness => true, :length => { :in => 3..20 }, if: :step1?
   validates :email, :presence => true, :uniqueness => true, if: :step1?
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create, if: :step1?
@@ -17,7 +14,7 @@ class User < ActiveRecord::Base
   end
   
   def select_three_images
-    if image_selection.size != 4
+    if image_selection.first == "" && image_selection.size != 4
       errors.add(:image_selection, "You must select three images")
     else
       image_selection.delete("")
