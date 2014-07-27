@@ -15,8 +15,7 @@
     </div>
   <% end %>
 
-  <%= render 'form', :f => f %>
-  <%= render 'image_selection' %>
+<%= render "#{@user.current_step}_step", :f => f %>
   <div class="actions">
     <%= f.submit %>
   </div>

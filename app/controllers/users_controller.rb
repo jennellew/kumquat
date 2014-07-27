@@ -28,13 +28,17 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    if @user.save
-      flash[:notice] = "You signed up successfully"
-      flash[:color]= "valid"
-    else
-      flash[:notice] = "Form is invalid"
-      flash[:color]= "invalid"
-    end
+#     @user.current_step = session[:user_step]
+#     @user.next_step
+#     session[:user_step] = @user.current_step
+#     if @user.save
+#       flash[:notice] = "You signed up successfully"
+#       flash[:color]= "valid"
+#     else
+#       flash[:notice] = "Form is invalid"
+#       flash[:color]= "invalid"
+#     end
+    @user.next_step
     render "new"
   end
 
@@ -73,6 +77,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :email, :password)
+      params.require(:user).permit(:username, :email, :password, {:image_selection => []})
     end
 end
