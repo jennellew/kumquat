@@ -1,14 +1,34 @@
-<h2>User Information</h2>
-  <div class="field">
-    <%= f.label :username %><br>
-    <%= f.text_field :username %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
- <div class="field">
-   <%= f.label :password %><br>
-   <%= f.password_field :password %>
-  </div>
- 
+<% if @user.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%= form_for @user do |f| %>
+
+  <% unless params[:all] %>
+
+<%= f.hidden_field :current_step, value: @user.current_step %>
+<%= render "users/steps/page#{@user.current_step + 1}", f: f %>
+
+    <div class="field">
+      <%= f.submit "Back", name: "back_button" unless @user.first_step? %>
+      <%= f.submit @user.last_step? ? nil: "Next" %>
+    </div>
+
+  <% else %>
+
+    <%# all the fields on one page... %>
+    <%= hidden_field_tag :all, 1 %>
+    <% User.total_steps.times do |step| %>
+    <%= render "users/steps/page#{step + 1}", f: f %>
+    <% end %>
+    <%= f.submit %>
+
+  <% end %>
+
+<% end %>
