@@ -2,12 +2,17 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @user.name %>
+  <%= @user.username %>
 </p>
 
 <p>
   <strong>Email:</strong>
   <%= @user.email %>
+</p>
+
+<p>
+  <strong>Image Selection:</strong>
+  <%= @user.image_selection %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |

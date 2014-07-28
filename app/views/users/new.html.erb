@@ -2,9 +2,8 @@
 <h1>Sign Up</h1>
 <h3>Fill in the form below to get started with Kumquat.</h3>
 
+<h1>New User (step <%= @user.current_step + 1 %>)</h1>
 
-<div class="Sign_Form">
 <%= render 'form' %>
-</div>
 
 <%= link_to 'Back', users_path %>

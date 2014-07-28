@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :update, :edit, :destroy]
+  before_action :load_wizard, only: [:new, :edit, :create, :update]
 
+  
   def welcome
   end
   
@@ -17,7 +19,7 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    @user = User.new
+    @user = @wizard.object
   end
 
   # GET /users/1/edit
@@ -27,15 +29,11 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
-    if @user.save
-      flash[:notice] = "You signed up successfully"
-      flash[:color]= "valid"
-      redirect_to '/users'
+    @user =@wizard.object
+    if @wizard.save
+      redirect_to @user, notice: "User saved!"
     else
-      flash[:notice] = "Form is invalid"
-      flash[:color]= "invalid"
-      render "new"
+      render :new
     end
   end
 
@@ -74,6 +72,17 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :email, :password)
+      params.require(:user).permit(:username, :email, :password, {:image_selection => []})
     end
+  
+  private
+
+  def load_wizard
+    @wizard = ModelWizard.new(@puser || User, session, params)
+    if self.action_name.in? %w[new edit]
+      @wizard.start
+    elsif self.action_name.in? %w[create update]
+      @wizard.process
+    end
+  end
 end

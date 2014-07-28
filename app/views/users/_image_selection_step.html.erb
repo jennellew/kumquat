@@ -1,0 +1,21 @@
+<h2>Image Selection</h2>
+<h3>Select three memorable images</h3>
+
+<div class="field">
+  <%= f.select(:image_selection, [['img01','01', {'data-img-src'=>"/assets/mem_images/img01.png"}], ['img02','02', {'data-img-src'=>"/assets/mem_images/img02.png"}],['img03','03', {'data-img-src'=>"/assets/mem_images/img03.png"}],['img04','04', {'data-img-src'=>"/assets/mem_images/img04.png"}],['img05','05', {'data-img-src'=>"/assets/mem_images/img05.png"}]], {}, {:id => 'cs-imgPicker', :class => 'image-picker show-html', :multiple => 'multiple', 'data-limit' => 3}) %>
+  </div>
+
+  <%= javascript_tag do %>
+  $("#cs-imgPicker").imagepicker({ 
+    hide_select:true, 
+    show_label:false 
+  });
+    var cs_masonry_container = jQuery("select.image-picker.masonry").next("ul.thumbnails");
+    cs_masonry_container.imagesLoaded(function(){ 
+      cs_masonry_container.masonry({ 
+      itemSelector:"li",
+    }); 
+  });
+  <% end %>
+  
+</div>
