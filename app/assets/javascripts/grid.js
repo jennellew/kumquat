@@ -294,6 +294,7 @@ window.onload = function() {
         img_grid.password.length = 0;
         img_grid.click = 0;
         img_grid.index = 0;
+       clearPracticeSelection();
 
         confirmButton.style.visibility = "hidden"; // hide confirm password button; will show up when 6 points selected anyway
         document.getElementById('statusLabel').innerHTML = "<b>Status:</b> You have started a new attempt. You are now entering in a password";
