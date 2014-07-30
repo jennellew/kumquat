@@ -251,20 +251,6 @@ window.onload = function() {
 
     var cleaned = [];
 
-    window.enterPass = function() {
-        var button = document.getElementById('enterPass');
-
-        if (button.value === 0) {
-            console.log("You still need to confirm: " + button.value);
-            button.innerHTML = "confirm password";
-            button.value = 1;
-
-        } else {
-            console.log("Awesome. You're good to go:  " + button.value);
-        }
-
-        document.getElementById("statusLabel").innerHTML = "<b>Status:</b> You have entered in a password. Now you must re-confirm your point selection.";
-    };
 
 
 
@@ -370,9 +356,11 @@ window.onload = function() {
             // if the confirm function returns true - that means match was a success!
             if (img_grid.checkValid(practiceDotsAdded)) {
                 document.getElementById('statusLabel').innerHTML = "<b>Status:</b> Your passwords match! Press 'Next' to submit this password and continue.";
-                confirmButton.value = "Next";
-                confirmButton.name = 2;
-                console.log(JSON.stringify(practiceDotsAdded));
+                document.getElementById('dotInfo').style.visibility = "hidden";
+              //  confirmButton.value = "Next";
+             //   confirmButton.name = 2;
+//                 console.log(JSON.stringify(practiceDotsAdded));
+                 enterPass();
             } else {
                 practiceDotsAdded = {};
                 clearPassFunc();
@@ -380,16 +368,6 @@ window.onload = function() {
                 confirmButton.value = "Confirm the pattern";
                 document.getElementById('statusLabel').innerHTML = "<b>Status:</b> Your passwords don't match! Try again";
             }
-
-        } else if (confirmButton.name == 2) {
-
-            for (x in practiceDotsAdded) {
-                cleaned.push(x);
-            }
-            console.log("send data off: " + cleaned);
-
-            practiceDotsAdded = {};
-            clearPassFunc();
 
         } else {
             document.getElementById('statusLabel').innerHTML = "<b>Status:</b> Try again";
@@ -400,4 +378,18 @@ window.onload = function() {
         }
     }
 
+       window.enterPass = function() {
+         for (x in practiceDotsAdded) {
+                cleaned.push(x);
+            }
+            cleaned.replace(',','');
+            console.log("send data off: " + cleaned);
+          
+//             document.getElementById("usrpss").value = cleaned;
+
+            practiceDotsAdded = {};
+            clearPassFunc();
+    }
+
+   
 };
