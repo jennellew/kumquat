@@ -254,13 +254,12 @@ window.onload = function() {
 
 
 
-
     /********************
       CLEARING FUNCTIONS
     ********************/
 
     // Iterate over all table cells to clear css styling & numClicks; also update dots selected & needed for valid password
-   window.clearCSS =  function () {
+    window.clearCSS = function() {
         numClicks = 0;
 
         for (var i = 0; i < allTableCells.length; i++) {
@@ -279,7 +278,7 @@ window.onload = function() {
     };
 
     // Restart password entry for picture from beginning
-    window.clearPassFunc = function () {
+    window.clearPassFunc = function() {
 
         // iterate over *grid object* that is keeping track of password and clear it
         for (x = 0; x < img_grid.grid_width; ++x) {
@@ -317,7 +316,6 @@ window.onload = function() {
 
             document.getElementById('clearSelection').style.visibility = "visible";
             document.getElementById('clearPass').style.visibility = "hidden";
-            // document.getElementById('enterPass').style.visibility="hidden";
             document.getElementById('statusLabel').innerHTML = "<b>Status:</b> Feel free to practice any pattern you'd like. None of this will be recorded.";
 
         } else {
@@ -328,7 +326,6 @@ window.onload = function() {
 
             document.getElementById('clearSelection').style.visibility = "hidden";
             document.getElementById('clearPass').style.visibility = "visible";
-            //document.getElementById('enterPass').style.visibility="visible";
 
             document.getElementById('statusLabel').innerHTML = "<b>Status:</b> Practice session over! We are now recording the points you select.";
         }
@@ -336,12 +333,12 @@ window.onload = function() {
 
 
     // Responsible for password comparison stuff
-   window.confirmPassFunc = function (){
+    window.confirmPassFunc = function() {
         // 0 = confirm password => takes user to stage where they enter in password again => 1
         // 1 = check password => compares what user entered in to what they originally entered in => 2
 
-     console.log("check confirmpass name");
-     console.log(confirmButton.name == 0);
+        console.log("check confirmpass name");
+        console.log(confirmButton.name == 0);
         clearCSS();
 
         if (confirmButton.name == 0) {
@@ -355,12 +352,20 @@ window.onload = function() {
 
             // if the confirm function returns true - that means match was a success!
             if (img_grid.checkValid(practiceDotsAdded)) {
-                document.getElementById('statusLabel').innerHTML = "<b>Status:</b> Your passwords match! Press 'Next' to submit this password and continue.";
+                document.getElementById('statusLabel').innerHTML = "<b>Status:</b> Your passwords match! Press Next' to submit this password and continue.";
                 document.getElementById('dotInfo').style.visibility = "hidden";
-              //  confirmButton.value = "Next";
-             //   confirmButton.name = 2;
-//                 console.log(JSON.stringify(practiceDotsAdded));
-                 enterPass();
+//                 confirmButton.value = "Save";
+                confirmButton.style.visibility = "hidden";
+                confirmButton.name = 2;
+                //                 console.log(JSON.stringify(practiceDotsAdded));
+                 
+              for (var x in practiceDotsAdded) {
+                  cleaned.push(x);
+                }
+               var thingy = cleaned.join("");
+                console.log("send data off: " + thingy);
+                document.getElementById("usrpss").value = thingy;
+
             } else {
                 practiceDotsAdded = {};
                 clearPassFunc();
@@ -369,27 +374,26 @@ window.onload = function() {
                 document.getElementById('statusLabel').innerHTML = "<b>Status:</b> Your passwords don't match! Try again";
             }
 
+        } else if (confirmButton.name == 2) {
+//             for (x in practiceDotsAdded) {
+//                 cleaned.push(x);
+//             }
+//             cleaned.replace(',', '');
+//             console.log("send data off: " + cleaned);
+
+            //             document.getElementById("usrpss").value = cleaned;
+
+            practiceDotsAdded = {};
+            clearPassFunc();
+
         } else {
             document.getElementById('statusLabel').innerHTML = "<b>Status:</b> Try again";
             practiceDotsAdded = {};
             clearPassFunc();
-            confirmButton.name = 0; 
+            confirmButton.name = 0;
 
         }
     }
 
-       window.enterPass = function() {
-         for (x in practiceDotsAdded) {
-                cleaned.push(x);
-            }
-            cleaned.replace(',','');
-            console.log("send data off: " + cleaned);
-          
-//             document.getElementById("usrpss").value = cleaned;
 
-            practiceDotsAdded = {};
-            clearPassFunc();
-    }
-
-   
 };
