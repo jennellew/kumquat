@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :edit, :destroy]
   before_action :load_wizard, only: [:new, :edit, :create, :update]
-
   
   def welcome
   end
@@ -31,7 +30,9 @@ class UsersController < ApplicationController
   def create
     @user =@wizard.object
     if @wizard.save
-      redirect_to @user, notice: "User saved!"
+      sign_in @user
+      redirect_to @user, notice: "User created!"
+      redirect_to @user
     else
       render :new
     end
@@ -76,13 +77,12 @@ class UsersController < ApplicationController
     end
   
   private
-
-  def load_wizard
-    @wizard = ModelWizard.new(@puser || User, session, params)
-    if self.action_name.in? %w[new edit]
-      @wizard.start
-    elsif self.action_name.in? %w[create update]
-      @wizard.process
+    def load_wizard
+      @wizard = ModelWizard.new(@puser || User, session, params)
+      if self.action_name.in? %w[new edit]
+        @wizard.start
+      elsif self.action_name.in? %w[create update]
+        @wizard.process
+      end
     end
-  end
 end
