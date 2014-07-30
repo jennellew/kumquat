@@ -1,3 +1,79 @@
-<h2>Step 3</h2>
+<!-- <h2>Step 3</h2>
 
 <%= image_tag("mem_images/img#{@user.image_selection[0]}.png") %>
+
+ -->
+
+
+<body data-no-turbolink>
+    
+    Recording your password begins <i>as soon as</i> you start selecting dots on the grid (provided you are not in practice mode). Look at the <b>Status</b> message to determine your current status.
+    
+    <br><br>
+
+    <b>Remember:</b> 
+    
+    <ul>
+      <li>You need to select <b>at minimum 6 points</b>, and may select <b>up to a maximum of 11 points</b>.</li>
+      <li>The <i>order</i> in which you choose the dots <i>matters</i>, so please think carefully. </li>
+    </ul>
+    
+    <b>Tips:</b> 
+    
+    <ul>
+      <li>
+        <b>Practice!</b> First find a pattern you remember (i.e. selecting dots near parts of the image that catch your eye, or any area of the grid that you feel you are prone to remembering), then add an order to it. You can practice patterns without saving them by using the <b>practice</b> check box.</li>
+      <li>
+        Add points in a direction you are prone to following (i.e. from left to right, right to left, top to bottom, bottom to top, clockwise, anticlockwise, diagonally, etc.</li>
+    </ul>
+    
+    <br>
+
+    <!-- Practice related stuff -->
+    <input type="checkbox" name="practice" id="practice" onclick="practiceMode()" title="When you practice, none of the dots you press will be saved."/>  Hold on, I want to practice some patterns!  
+    <button id="clearSelection" onclick="clearPracticeSelection()">Clear Selection</button> <!-- Clear their current entry before submission -->          
+    
+    
+    <br><br>
+
+    <button id="clearPass" onclick="clearPass()" title="Clear my entries for this picture!">Start Recording Again</button> <!-- clear everything and start over -->    
+<!--     <button id="confirmPass" onclick="confirmPass()" title="Save your current selection, and confirm it by recreating it." value="0">Confirm the pattern</button> -->
+  <%= button_tag "Confirm the pattern",:type => 'button',:class => "subBtn", :onclick => "confirmPass()", :id =>"confirmPass" %>
+
+
+    <br><br>
+    <label id="statusLabel"><b>Status:</b> Please enter a password.</label>
+    
+    <br><br>
+    
+    <label id="dotInfo">You have selected <span id="dotCount">0</span> dots. You need <span id="dotLeft">6</span> additional dots for a valid password.</label> 
+   
+        
+
+
+    <div id='divGrid' style="background-image: url(http://www.carvel.com/public/images/ice-cream-cakes/celebration-cakes/round-cake.jpg); background-repeat: no-repeat;">
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br>
+  
+    </div>
+    
+    <!-- call grid javascript logic -->
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br>
+  
+
+  </body>
