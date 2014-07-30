@@ -1,9 +1,11 @@
 class User < ActiveRecord::Base
   attr_accessor :password
   attr_writer :current_step
+  before_save {self.email = email.downcase
+      self.username = username.downcase}
   
-  validates :username, :presence => true, :uniqueness => true, :length => { :in => 3..20 }, if: :step1?
-  validates :email, :presence => true, :uniqueness => true, if: :step1?
+  validates :username, :presence => true, uniqueness: { case_sensitive: false }, :length => { :in => 3..20 }, if: :step1?
+  validates :email, :presence => true, uniqueness: { case_sensitive: false }, if: :step1?
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create, if: :step1?
   validate :select_three_images, if: :step2?
   

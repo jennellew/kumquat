@@ -1,0 +1,15 @@
+<h1>Welcome back!</h1>
+<h3>Log in to use Kumquat.</h3>
+
+<div class="row">
+  <%= form_for(:session, url: sessions_path) do |f| %>
+
+  <%= f.label :username %>
+  <%= f.text_field :username %>
+
+  <%= f.submit "Sign in" %>
+  <% end %>
+
+  <p>New user? <%= link_to "Sign up now!", register_path %></p>
+</div>
+<%= link_to 'Back', users_path %>

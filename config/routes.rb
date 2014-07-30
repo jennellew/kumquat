@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :users
+  resources :sessions, only: [:new, :create, :destroy]
   get "/login" => "users#login"    # login page
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -7,6 +8,9 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'users#welcome'
+  match '/register', to: 'users#new', via: 'get'
+  match '/signin', to: 'sessions#new', via: 'get'
+  match '/signout', to: 'sessions#destroy', via: 'delete'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalogs#view'
