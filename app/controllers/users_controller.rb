@@ -30,7 +30,9 @@ class UsersController < ApplicationController
   def create
     @user =@wizard.object
     if @wizard.save
-      redirect_to @user, notice: "User saved!"
+      sign_in @user
+      redirect_to @user, notice: "User created!"
+      redirect_to @user
     else
       render :new
     end
