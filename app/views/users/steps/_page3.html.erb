@@ -31,12 +31,15 @@
 
     <!-- Practice related stuff -->
     <input type="checkbox" name="practice" id="practice" onclick="practiceMode()" title="When you practice, none of the dots you press will be saved."/>  Hold on, I want to practice some patterns!  
-    <button id="clearSelection" onclick="clearPracticeSelection()">Clear Selection</button> <!-- Clear their current entry before submission -->          
-    
+   <!-- <button id="clearSelection" onclick="clearPracticeSelection()">Clear Selection</button> --><!-- Clear their current entry before submission -->          
+    <input id="clearSelection" type="button" value="Clear Selection" onclick="clearPracticeSelection()" />
+
     
     <br><br>
 
-    <button id="clearPass" onclick="clearPass()" title="Clear my entries for this picture!">Start Recording Again</button> clear everything and start over    
+<!--     <button id="clearPass" onclick="clearPass()" title="Clear my entries for this picture!">Start Recording Again</button> clear everything and start over     -->
+      <input id="clearPass" type="button" value="Start Recording Again" onclick="clearPassFunc()" />
+
 <!--     <button id="confirmPass" onclick="confirmPass()" title="Save your current selection, and confirm it by recreating it." value="0">Confirm the pattern</button> -->
     <input id="confirmPass" type="button" name="0" value="Confirm Password" onclick="confirmPassFunc()" />
 <!--   <%= button_tag "Confirm the pattern",:type => 'button',:class => "subBtn", :onclick => "confirmPass()", :id =>"confirmPass" %> -->

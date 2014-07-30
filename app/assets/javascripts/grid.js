@@ -293,7 +293,7 @@ window.onload = function() {
     };
 
     // Restart password entry for picture from beginning
-    window.clearPass = function () {
+    window.clearPassFunc = function () {
 
         // iterate over *grid object* that is keeping track of password and clear it
         for (x = 0; x < img_grid.grid_width; ++x) {
@@ -325,7 +325,7 @@ window.onload = function() {
 
         if (checkbox.checked && practiceTime === false) { // if checkbox ticked & not already in practice mode, set global var practiceTime to true
 
-            clearPass();
+            clearPassFunc();
 
             practiceTime = true; // WE'RE IN PRACTICE MODE
 
@@ -375,7 +375,7 @@ window.onload = function() {
                 console.log(JSON.stringify(practiceDotsAdded));
             } else {
                 practiceDotsAdded = {};
-                clearPass();
+                clearPassFunc();
                 confirmButton.name = 0;
                 confirmButton.value = "Confirm the pattern";
                 document.getElementById('statusLabel').innerHTML = "<b>Status:</b> Your passwords don't match! Try again";
@@ -389,12 +389,12 @@ window.onload = function() {
             console.log("send data off: " + cleaned);
 
             practiceDotsAdded = {};
-            clearPass();
+            clearPassFunc();
 
         } else {
             document.getElementById('statusLabel').innerHTML = "<b>Status:</b> Try again";
             practiceDotsAdded = {};
-            clearPass();
+            clearPassFunc();
             confirmButton.name = 0; 
 
         }
