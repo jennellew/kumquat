@@ -1,5 +1,4 @@
-window.onload = function()
-{
+
 /** TO DO: 
 - set up two divs? one with pass & grid, other with insns?
 - encode all user input/ html string char stuff 
@@ -153,4 +152,4 @@ window.onload = function()
 
 
 // All code here
-}
+

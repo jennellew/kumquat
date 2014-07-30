@@ -36,9 +36,10 @@
     
     <br><br>
 
-    <button id="clearPass" onclick="clearPass()" title="Clear my entries for this picture!">Start Recording Again</button> <!-- clear everything and start over -->    
+    <button id="clearPass" onclick="clearPass()" title="Clear my entries for this picture!">Start Recording Again</button> clear everything and start over    
 <!--     <button id="confirmPass" onclick="confirmPass()" title="Save your current selection, and confirm it by recreating it." value="0">Confirm the pattern</button> -->
-  <%= button_tag "Confirm the pattern",:type => 'button',:class => "subBtn", :onclick => "confirmPass()", :id =>"confirmPass" %>
+    <input id="confirmPass" type="button" name="0" value="Confirm Password" onclick="confirmPassFunc()" />
+<!--   <%= button_tag "Confirm the pattern",:type => 'button',:class => "subBtn", :onclick => "confirmPass()", :id =>"confirmPass" %> -->
 
 
     <br><br>
