@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def create
     user = User.find_by(username: params[:session][:username].downcase)
-    if user
+    if user && user.authenticate(params[:session][:password])
       #TODO
       flash.now[:success] = 'You exist!'
       sign_in user

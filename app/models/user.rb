@@ -1,14 +1,15 @@
 class User < ActiveRecord::Base
+  
   attr_accessor :password
   attr_writer :current_step
-  before_save :downcase
+  before_save :downcase, :encrypt_password
   before_create :create_remember_token
   
   validates :username, :presence => true, uniqueness: { case_sensitive: false }, :length => { :in => 3..20 }, if: :step1?
   validates :email, :presence => true, uniqueness: { case_sensitive: false }, if: :step1?
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create, if: :step1?
   validate :select_three_images, if: :step2?
-  
+  has_secure_password validations: false
   include MultiStepModel
 
   def self.total_steps
@@ -42,14 +43,14 @@ class User < ActiveRecord::Base
     self.username = username.downcase
   end
   
-#   def encrypt_password
-#     unless password.blank?
-#       self.salt = BCrypt::Engine.generate_salt
-#       self.encrypted_password = BCrypt::Engine.hash_secret(password, salt)
-#     end
-#   end
+  def encrypt_password
+    unless password.blank?
+      self.salt = BCrypt::Engine.generate_salt
+      self.password_digest = BCrypt::Engine.hash_secret(password, salt)
+    end
+  end
 
-#   def clear_password
-#     self.password = nil
-#   end
+  def clear_password
+    self.password = nil
+  end
 end

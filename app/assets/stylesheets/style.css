@@ -1,0 +1,20 @@
+table {
+    border: 1px dotted red;
+}
+
+table td {
+    background-image: url('http://asubtlerevelry.com/wp-content/themes/asubtlerevelry/theme/dot.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 30px;
+    height: 30px;
+}
+
+table td:hover {
+    background-color: grey;
+}
+
+#clearSelection, #confirmPass{
+  visibility: hidden;
+}
+

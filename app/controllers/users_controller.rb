@@ -32,7 +32,6 @@ class UsersController < ApplicationController
     if @wizard.save
       sign_in @user
       redirect_to @user, notice: "User created!"
-      redirect_to @user
     else
       render :new
     end
