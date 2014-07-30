@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   attr_accessor :password
   attr_writer :current_step
-  before_save {self.email = email.downcase
-      self.username = username.downcase}
+  before_save :downcase
+  before_create :create_remember_token
   
   validates :username, :presence => true, uniqueness: { case_sensitive: false }, :length => { :in => 3..20 }, if: :step1?
   validates :email, :presence => true, uniqueness: { case_sensitive: false }, if: :step1?
@@ -21,6 +21,25 @@ class User < ActiveRecord::Base
     else
       image_selection.delete("")
     end
+  end
+  
+  def User.new_remember_token
+    SecureRandom.urlsafe_base64
+  end
+  
+  def User.digest(token)
+    Digest::SHA1.hexdigest(token.to_s)
+  end
+  
+  private
+  def create_remember_token
+    self.remember_token = User.digest(User.new_remember_token)
+  end
+  
+  private
+  def downcase
+    self.email = email.downcase
+    self.username = username.downcase
   end
   
 #   def encrypt_password

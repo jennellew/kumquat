@@ -4,7 +4,8 @@ class SessionsController < ApplicationController
     if user
       #TODO
       flash.now[:success] = 'You exist!'
-      render 'new'
+      sign_in user
+      redirect_to user
     else
       flash.now[:error] = "You don't exist D:"
       render 'new'
